@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'database_helper.dart';
 
 class LeaveManagementScreen extends StatefulWidget {
+  const LeaveManagementScreen({super.key});
+
   @override
-  _LeaveManagementScreenState createState() => _LeaveManagementScreenState();
+  LeaveManagementScreenState createState() => LeaveManagementScreenState();
 }
 
-class _LeaveManagementScreenState extends State<LeaveManagementScreen> {
+class LeaveManagementScreenState extends State<LeaveManagementScreen> {
   final DatabaseHelper _databaseHelper = DatabaseHelper();
   final TextEditingController _reasonController = TextEditingController();
   List<Map<String, dynamic>> _leaves = [];

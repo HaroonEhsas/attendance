@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'database_helper.dart';
 
 class ShiftManagementScreen extends StatefulWidget {
+  const ShiftManagementScreen({super.key});
+
   @override
-  _ShiftManagementScreenState createState() => _ShiftManagementScreenState();
+  ShiftManagementScreenState createState() => ShiftManagementScreenState();
 }
 
-class _ShiftManagementScreenState extends State<ShiftManagementScreen> {
+class ShiftManagementScreenState extends State<ShiftManagementScreen> {
   final DatabaseHelper _databaseHelper = DatabaseHelper();
   final TextEditingController _shiftNameController = TextEditingController();
   final TextEditingController _startTimeController = TextEditingController();
@@ -27,7 +29,9 @@ class _ShiftManagementScreenState extends State<ShiftManagementScreen> {
   Future<void> _createShift() async {
     if (_shiftNameController.text.isEmpty ||
         _startTimeController.text.isEmpty ||
-        _endTimeController.text.isEmpty) return;
+        _endTimeController.text.isEmpty) {
+      return;
+    }
     await _databaseHelper.createShift({
       'name': _shiftNameController.text,
       'start_time': _startTimeController.text,

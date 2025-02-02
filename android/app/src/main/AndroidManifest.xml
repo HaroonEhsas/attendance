@@ -1,33 +1,36 @@
-<!--suppress ALL -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidUnknownAttribute -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.attendance">
+    package="com.example.attendance"
+    tools:ignore="MissingVersion">
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-
-    <!-- Background location permission (Android 10 and above) -->
-    <uses-permission
-        android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
-        tools:remove="android:maxSdkVersion" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"
+        tools:ignore="SystemPermissionTypo" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:label="Attendance App"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"> <!-- Use a valid theme -->
+        android:theme="@style/LaunchTheme">
 
+        <!-- MainActivity for Flutter -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            tools:targetApi="honeycomb">
 
+            <!-- Required meta-data for Flutter -->
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />

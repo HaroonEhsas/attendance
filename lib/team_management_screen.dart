@@ -25,19 +25,27 @@ class TeamManagementScreenState extends State<TeamManagementScreen> {
     setState(() {});
   }
 
-  Future<void> _createTeam() async {
+  // Now, handle navigation before the async call
+  void _createTeam(BuildContext context) {
     if (_teamNameController.text.isEmpty) return;
-    await _databaseHelper.createTeam(_teamNameController.text);
-    _teamNameController.clear();
-    await _loadTeams();
 
-    // Navigate to the next page (e.g., team details)
+    // Navigate to TeamDetailsScreen first
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => TeamDetailsScreen(teamName: _teamNameController.text),
       ),
     );
+
+    // Perform the async operation afterwards
+    _createTeamInDatabase();
+  }
+
+  Future<void> _createTeamInDatabase() async {
+    // Creating the team in the database
+    await _databaseHelper.createTeam(_teamNameController.text);
+    _teamNameController.clear();
+    await _loadTeams();
   }
 
   @override
@@ -54,7 +62,7 @@ class TeamManagementScreenState extends State<TeamManagementScreen> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _createTeam,
+              onPressed: () => _createTeam(context), // Use context immediately
               child: Text('Create Team'),
             ),
             SizedBox(height: 20),

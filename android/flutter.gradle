@@ -1,0 +1,6 @@
+// Flutter Gradle Plugin
+
+def flutterRoot = rootProject.file('../..')  // You may need to adjust the path if your structure is different
+
+// This is where the Flutter gradle plugin is located
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
