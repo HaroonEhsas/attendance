@@ -1,28 +1,10 @@
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
-}
-
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
-
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.gms.google-services' // Add this line for Firebase
+apply plugin: 'com.google.gms.google-services'  // Firebase plugin
 
 android {
-    namespace "com.example.attendance" // Replace with your package name
-    compileSdkVersion 34 // Use the latest compileSdkVersion
+    namespace "com.example.attendance"
+    compileSdkVersion 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -38,11 +20,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.attendance" // Replace with your package name
-        minSdkVersion 21 // Minimum SDK version for Firebase
-        targetSdkVersion 34 // Use the latest targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        applicationId "com.example.attendance"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode project.hasProperty('flutterVersionCode') ? project.flutterVersionCode.toInteger() : 1
+        versionName project.hasProperty('flutterVersionName') ? project.flutterVersionName : '1.0'
     }
 
     buildTypes {
@@ -58,7 +40,10 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation platform('com.google.firebase:firebase-bom:33.8.0') // Add this line for Firebase
-    implementation 'com.google.firebase:firebase-analytics' // Optional: For Firebase Analytics
-    implementation 'com.google.firebase:firebase-firestore' // Add this line for Firestore
+    implementation platform('com.google.firebase:firebase-bom:33.8.0') // Firebase BOM
+    implementation 'com.google.firebase:firebase-analytics'  // Firebase Analytics
+    implementation 'com.google.firebase:firebase-firestore'  // Firestore
+    // Optional: Additional Firebase services
+    implementation 'com.google.firebase:firebase-auth'  // Authentication
+    implementation 'com.google.firebase:firebase-messaging'  // Cloud Messaging
 }
